@@ -6,16 +6,10 @@ def main():
     dictionarymaker(file_contents, letter_dict)
 
 
-    for character, num in letter_dict.items():
-        char_dict = {"character": character, "num":num}
-        letter_dict_list.append(char_dict)
+    nicelist(letter_dict, letter_dict_list)   
+
+
     
-    letter_dict_list.sort(reverse=True, key=sort_on)
-#    print(letter_dict_list)
-
-
-    for each in letter_dict_list:
-        print(f"The {each['character']} was found {each['num']} times.")
 
 def dictionarymaker(file_contents, dictionary):
     words = file_contents.split()
@@ -28,22 +22,28 @@ def dictionarymaker(file_contents, dictionary):
                   dictionary[lowercase] = 0
                 dictionary[lowercase] += 1
     return dictionary
-    
-
-
-
 
 def dictionarysplits (dictionary):
     for each in dictionary.items():
         print(each)     #Prints each  combo as a (x, #) tuple
         print(each[0])  #Prints each Key - Tuple
         print(each[1])  #prints each Value - Tuple
-
         
 def sort_on(dict):
     return dict["num"]
 
-#def nicelist(dict, list)
+def nicelist(dict, list):
+    #Make a list of dicts
+    for character, num in dict.items():
+        char_dict = {"character": character, "num":num}
+        list.append(char_dict)
+
+    #sort it using sort_on
+    list.sort(reverse=True, key=sort_on)
+
+    #print the nice list
+    for each in list:
+        print(f"The {each['character']} was found {each['num']} times.")
 
 
 main()
